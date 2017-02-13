@@ -14,7 +14,7 @@ public extension NibLoadable where Self: UIView {
 
 public struct IBNibLoader<NibLoadableView: NibLoadable where NibLoadableView: UIView> {
     
-    func awakeAfter(using aDecoder: NSCoder, @autoclosure _ superMethod: () -> AnyObject?) -> AnyObject? {
+    public func awakeAfter(using aDecoder: NSCoder, @autoclosure _ superMethod: () -> AnyObject?) -> AnyObject? {
         guard nonPrivateSubviews.isEmpty else { return superMethod() }
         
         let nibView = view.dynamicType.fromNib()
@@ -23,7 +23,7 @@ public struct IBNibLoader<NibLoadableView: NibLoadable where NibLoadableView: UI
         return nibView
     }
     
-    func initWithFrame() {
+    public func initWithFrame() {
         #if TARGET_INTERFACE_BUILDER
             let nibView = view.dynamicType.fromNib()
             copyProperties(to: nibView)
@@ -35,7 +35,7 @@ public struct IBNibLoader<NibLoadableView: NibLoadable where NibLoadableView: UI
         #endif
     }
     
-    func prepareForInterfaceBuilder() {
+    public func prepareForInterfaceBuilder() {
         if nonPrivateSubviews.count == 1 {
             // Used as a reference container
             view.backgroundColor = .clearColor()
@@ -45,7 +45,7 @@ public struct IBNibLoader<NibLoadableView: NibLoadable where NibLoadableView: UI
         }
     }
     
-    func setValue(value: AnyObject?, forKeyPath keyPath: String) {
+    public func setValue(value: AnyObject?, forKeyPath keyPath: String) {
         #if TARGET_INTERFACE_BUILDER
             guard let subview = value as? UIView else { return }
             SubviewsCopier.store(subview: subview, forKeyPath: keyPath, of: view)
