@@ -8,14 +8,14 @@
 
 import UIKit
 
-open class NibView: UIView, NibLoadable {
+public class NibView: UIView, NibLoadable {
     
-    open class var nibName: String {
-        return String(describing: self)
+    public class var nibName: String {
+        return String(self)
     }
     
-    open override func awakeAfter(using aDecoder: NSCoder) -> Any? {
-        return nibLoader.awakeAfter(using: aDecoder, super.awakeAfter(using: aDecoder))
+    public override func awakeAfterUsingCoder(aDecoder: NSCoder) -> AnyObject? {
+        return nibLoader.awakeAfter(using: aDecoder, super.awakeAfterUsingCoder(aDecoder))
     }
     
     // MARK: - Interface builder
@@ -31,12 +31,12 @@ open class NibView: UIView, NibLoadable {
             super.init(coder: aDecoder)
         }
         
-        open override func prepareForInterfaceBuilder() {
+        public override func prepareForInterfaceBuilder() {
             super.prepareForInterfaceBuilder()
             nibLoader.prepareForInterfaceBuilder()
         }
-        
-        open override func setValue(_ value: Any?, forKeyPath keyPath: String) {
+    
+        public override func setValue(value: AnyObject?, forKeyPath keyPath: String) {
             super.setValue(value, forKeyPath: keyPath)
             nibLoader.setValue(value, forKeyPath: keyPath)
         }

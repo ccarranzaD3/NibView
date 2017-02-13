@@ -91,14 +91,14 @@ public protocol NibLoadable: class {
 public extension NibLoadable where Self: UIView {
     
     static var nibName: String {
-         return String(describing: self)
+         return String(self)
     }
     
     static func fromNib() -> Self {
-        guard let nib = Bundle(for: self).loadNibNamed(nibName, owner: nil, options: nil) else {
+        guard let nib = NSBundle(forClass: self).loadNibNamed(nibName, owner: nil, options: nil) else {
             fatalError("Failed loading the nib named \(nibName) for 'NibLoadable' view of type '\(self)'.")
         }
-        guard let view = (nib.first { $0 is Self }) as? Self else {
+        guard let view = (nib.filter { $0 is Self }.first) as? Self else {
             fatalError("Did not find 'NibLoadable' view of type '\(self)' inside '\(nibName).xib'.")
         }
         return view

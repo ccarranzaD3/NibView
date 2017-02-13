@@ -10,14 +10,14 @@ import UIKit
 
 final class CardsListViewController: UIViewController {
     
-    @IBAction private func cardTapped(_ gesture: UITapGestureRecognizer) {
-        performSegue(withIdentifier: "ShowDetails", sender: gesture.view)
+    @IBAction private func cardTapped(gesture: UITapGestureRecognizer) {
+        performSegueWithIdentifier("ShowDetails", sender: gesture.view)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
         
-        guard let details = segue.destination as? CardDetailsViewController, let cardView = sender as? CardView else { return }
+        guard let details = segue.destinationViewController as? CardDetailsViewController, let cardView = sender as? CardView else { return }
         details.setup(with: cardView)
     }
     

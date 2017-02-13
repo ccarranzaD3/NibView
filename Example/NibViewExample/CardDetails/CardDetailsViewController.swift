@@ -18,6 +18,6 @@ class CardDetailsViewController: UIViewController, NibViewController {
     }
     
     @IBAction private func dismissAnimated() {
-        dismiss(animated: true, completion: nil)
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
